@@ -33,7 +33,7 @@ The AI then **cleans, ranks, and explains** the results — helping users quickl
 ---
 
 ## Architecture
-```mermaid
+
 flowchart TD
     U[User Query] --> M[Mode Selector: Nigeria / Global]
     M -->|Nigeria Mode| J[Jumia/Konga API]

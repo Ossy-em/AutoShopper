@@ -36,56 +36,88 @@ The AI then **cleans, ranks, and explains** the results — helping users quickl
 
 flowchart TD
     U[User Query] --> M[Mode Selector: Nigeria / Global]
+    
     M -->|Nigeria Mode| J[Jumia/Konga API]
+    
     M -->|Nigeria Mode| IG[Instagram Vendor Scraper]
+    
     M -->|Global Mode| AM[Amazon API]
+    
     M -->|Global Mode| EB[eBay API]
+    
     M -->|Global Mode| AL[AliExpress API]
+    
     J --> C[AI Cleaning Layer]
+    
     IG --> C
+    
     AM --> C
+    
     EB --> C
+    
     AL --> C
+    
     C --> R[AI Ranking Layer]
+    
     R --> O[UI Output: Comparison Table + Vendor Links]
 
 
 Tech Stack
 
 Frontend: Next.js+ TailwindCSS
+
 Backend: FastAPI or Express.js
+
 AI Layer: OpenAI GPT-5 / GPT-4o, LangChain
+
 Scraping/Data: Playwright, Apify, SerpAPI
+
 Database: PostgreSQL / SQLite
+
 Hosting: Vercel (frontend) + Railway or Render (backend)
 
 Installation
+
 # Clone the repo
 git clone https://github.com/your-username/autoshopper.git
 cd autoshopper
 
 # Backend setup
+
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
 
 # Frontend setup
+
 cd ../frontend
 npm install
 npm run dev
 
+
 Roadmap
+
 Phase 1: Core MVP (Nigeria Mode + Global Mode, 2 sources each)
+
 Phase 2: Add TikTok Shop, Google Search, Scam Detection, Alerts
+
 Phase 3: Multi-currency, Global Shipping Filters, Affiliate Integration
 
+
 Why This Project?
+
 This project demonstrates skills in:
+
 AI orchestration (multi-step pipelines)
+
 Web scraping & API integration
+
 Data cleaning & ranking with LLMs
+
 Full-stack development (React, FastAPI/Node.js)
+
 Designing for localized + global scalability
+
 
 Contributing
 Pull requests are welcome! For major changes, open an issue first to discuss what you’d like to change.

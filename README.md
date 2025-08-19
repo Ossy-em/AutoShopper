@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoShopper – AI-Powered Product Research Agent  
 
-## Getting Started
+AutoShopper is an **AI-powered shopping assistant** that helps users find the best products across **e-commerce sites and social media vendors**.  
 
-First, run the development server:
+Built with a **Nigeria-first, global-capable** design:  
+- **Nigeria Mode** → Searches Jumia, Konga, and local social media vendors (Instagram, X, Facebook Marketplace).  
+- **Global Mode** → Searches Amazon, eBay, and AliExpress.  
 
-```bash
+The AI then **cleans, ranks, and explains** the results — helping users quickly find the best deals.
+
+---
+
+## Features
+- **Natural Language Search**  
+  Example: *“Find me a UK used iPhone 12 under ₦300k in Lagos.”*  
+
+- **Dual Modes**  
+  - Nigeria Mode → Scrapes social media vendors & local marketplaces.  
+  - Global Mode → Pulls structured product data from APIs.  
+
+- **AI Cleaning & Extraction**  
+  Turns messy vendor posts (captions, flyers) into structured product info.  
+
+- **Smart Product Ranking**  
+  Ranks products by price, features, seller credibility, and delivery time.  
+
+- **Scam Filtering (Experimental)**  
+  Flags suspicious listings (e.g., prices “too good to be true”).  
+
+- **Visual Comparison Dashboard**  
+  Side-by-side product tables with images, links, and AI’s verdict.  
+
+---
+
+## Architecture
+```mermaid
+flowchart TD
+    U[User Query] --> M[Mode Selector: Nigeria / Global]
+    M -->|Nigeria Mode| J[Jumia/Konga API]
+    M -->|Nigeria Mode| IG[Instagram Vendor Scraper]
+    M -->|Global Mode| AM[Amazon API]
+    M -->|Global Mode| EB[eBay API]
+    M -->|Global Mode| AL[AliExpress API]
+    J --> C[AI Cleaning Layer]
+    IG --> C
+    AM --> C
+    EB --> C
+    AL --> C
+    C --> R[AI Ranking Layer]
+    R --> O[UI Output: Comparison Table + Vendor Links]
+
+
+Tech Stack
+
+Frontend: Next.js+ TailwindCSS
+Backend: FastAPI or Express.js
+AI Layer: OpenAI GPT-5 / GPT-4o, LangChain
+Scraping/Data: Playwright, Apify, SerpAPI
+Database: PostgreSQL / SQLite
+Hosting: Vercel (frontend) + Railway or Render (backend)
+
+Installation
+# Clone the repo
+git clone https://github.com/your-username/autoshopper.git
+cd autoshopper
+
+# Backend setup
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+
+# Frontend setup
+cd ../frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Roadmap
+Phase 1: Core MVP (Nigeria Mode + Global Mode, 2 sources each)
+Phase 2: Add TikTok Shop, Google Search, Scam Detection, Alerts
+Phase 3: Multi-currency, Global Shipping Filters, Affiliate Integration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Why This Project?
+This project demonstrates skills in:
+AI orchestration (multi-step pipelines)
+Web scraping & API integration
+Data cleaning & ranking with LLMs
+Full-stack development (React, FastAPI/Node.js)
+Designing for localized + global scalability
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Contributing
+Pull requests are welcome! For major changes, open an issue first to discuss what you’d like to change.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
